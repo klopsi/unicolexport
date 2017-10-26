@@ -8,9 +8,15 @@ simultaneous colors.
 Finding no editor for unicode art, i made this python plugin for gimp that exports an image 
 to unicode block graphics, using the 16-color mIRC palette.
 
-It is an entertaining challenge to draw pictures at low resolution with very few colors. It's fun to share them too. Make your own art and paste it to IRC channel ##ascii on the Freenode IRC network.
+It is an entertaining challenge to draw pictures at low resolution with very few colors. It's fun to share them too. Make your own art and paste it to IRC channel ##ascii on the Freenode IRC network. 
 
-USAGE:
+Installation:
+
+Linux:   Copy unicolexport.py to your ~/.gimp-2.8/plug-ins
+Windows: Install Linux
+
+
+Instructions:
 
  0) Run GIMP, preferably from a terminal.
  1) Open the image to export in GIMP
