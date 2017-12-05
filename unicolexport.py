@@ -161,7 +161,7 @@ def python_unicolexport(img, drawable, filename, raw_filename):
                         linecount += 2
                     linecount += 1 # Add a byte for the comma
                     fileOut.write('\x03')
-                    #fileOut.write(str(cfg))  // Foreground not needed for Space
+                    fileOut.write(str(cfg))  // Foreground not needed for Space
                     fileOut.write(",")
                     fileOut.write(str(cbg))
                 fileOut.write(" ")
