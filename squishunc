@@ -1,0 +1,306 @@
+#!/usr/bin/python3
+
+# squishunc: reduce filesize of unicode irc pictures
+# 
+# usage:  squishunc infile outfile
+#
+# note: creates tmp.unc and tmp2.unc which i leave in case one of the compression stages 
+#	causes errors, you can use tmp or tmp2 as intermediates
+
+import string
+import re
+import sys
+
+def swapchars2(inblocks):
+	outblocks = ''
+	swapElems = {' ': '▉' ,
+		'▉': ' ' ,
+		'▄': '▀' ,
+		'▀': '▄' ,
+		'▘': '▟' ,
+		'▟': '▘' ,
+		'▝': '▙' ,
+		'▙': '▝' ,
+		'▖': '▜' ,
+		'▜': '▖' ,
+		'▗': '▛' ,
+		'▛': '▗' ,
+		'▚': '▞' ,
+		'▞': '▚',
+		'▌': '▐',
+		'▐': '▌'
+	}
+	for i in inblocks: 
+		try:
+			outblocks += swapElems[i]
+		except:
+			outblocks += i
+	return outblocks
+	
+
+#print(str(sys.argv[2]))
+
+
+# FIRST PASS: invert blocks if this will save us from doing a color change -----------------
+
+infile = open(str(sys.argv[1]) , "r") 
+outfile = open("tmp.unc","w") 
+linewidth = 0
+linenum = 0
+weswapped = 0
+for line in infile: 
+	words = line.split("")
+	iterwords = iter(words)
+#	next(iterwords)
+	prevforecol = 99
+	prevbackcol = 99
+	for word in iterwords:
+		forecol = 98
+		backcol = 98
+#		print(word)
+		num = ''
+		blocks = ''
+
+		fgbg = 0
+		for i in word:
+			if i in '1234567890':
+				num+=i
+			if i == ',':
+				fgbg = 1
+				try:
+					forecol = int(num)
+				except ValueError:
+					forecol = 99
+#					print('ForecolBAD')
+				num = ''
+			if not i in ',1234567890':
+				blocks += i
+		if (fgbg == 0):
+			try:
+				forecol = int(num)
+				backcol = prevbackcol
+			except ValueError:
+				forecol = prevforecol
+				backcol = prevbackcol
+		else:
+			try:
+				backcol = int(num)
+				dontwriteblock = 0
+			except ValueError:
+				backcol = 99
+#				print('BackcolBAD')
+				dontwriteblock = 1
+
+
+
+		if (len(blocks) > 0 ):
+			if (prevforecol == backcol) and (prevbackcol == forecol) and (weswapped == 0):
+				outfile.write(swapchars2(blocks)),
+				weswapped = 1
+			elif (prevforecol == backcol) and (prevbackcol == forecol) and (weswapped == 1):
+				outfile.write(blocks),
+				weswapped = 0
+			else:
+#				linewidth = (linewidth + len(blocks) + len(str(forecol)) + 2 + (len(str(backcol)))
+				outfile.write('' + str(forecol) + ',' + str(backcol) + blocks),
+				#prevforecol = backcol
+				#prevbackcol = forecol
+				weswapped = 0
+			prevforecol = forecol
+			prevbackcol = backcol
+#	print('linenum: ' + str(linenum) + ' width: ' + str(linewidth))
+	linewidth = 0
+	linenum += 1
+
+infile.close() 
+outfile.close() 
+
+
+# SECOND PASS: invert blocks if this will enable us to prevent writing background col.	----
+
+infile = open("tmp.unc","r") 
+outfile = open("tmp2.unc","w") 
+linewidth = 0
+linenum = 0
+weswapped = 0
+nextnobg = 0
+for line in infile: 
+	oldblocks = ""
+	spacesinblock = 0
+	spacesinob = 0
+	words = line.split("")
+	iterwords = iter(words)
+#	next(iterwords)
+	prevforecol = 99
+	prevbackcol = 99
+	beginningofline = 1
+	for word in iterwords:
+		spacesinblock = 0
+		forecol = 97
+		backcol = 98
+#		print(word)
+		num = ''
+		blocks = ''
+		fgbg = 0
+		for i in word:
+			if i in '1234567890':
+				num+=i
+			if i == ',':
+				fgbg = 1
+				try:
+					forecol = int(num)
+				except ValueError:
+					forecol = 99
+#					print('ForecolBAD')
+				num = ''
+			if not i in ',1234567890':
+				blocks += i
+			if i == ' ':
+				spacesinblock += 1
+		if (fgbg == 0):
+			try:
+				forecol = int(num)
+				backcol = prevbackcol
+			except ValueError:
+				forecol = prevforecol
+				backcol = prevbackcol
+		else:
+			try:
+				backcol = int(num)
+				dontwriteblock = 0
+			except ValueError:
+				backcol = 99
+#				print('BackcolBAD')
+				dontwriteblock = 1
+
+#		if spacesinob > 0:	
+#			print('blocklen ' + str(len(blocks)) + ' numspaces ' + str(spacesinblock)),
+
+
+		if (len(oldblocks) >= 1 ):  # Python gives us empty words at the beginning of each line
+			if (prevforecol == forecol) and (prevbackcol != backcol) and (nextnobg == 0) and (spacesinob < 2):
+				outfile.write('' + str(prevbackcol) + ',' + str(prevforecol) + swapchars2(oldblocks)),
+				nextnobg = 1
+			elif (prevforecol == forecol) and (prevbackcol != backcol) and (nextnobg == 1) and (spacesinob < 2):
+				outfile.write('' + str(prevbackcol) + swapchars2(oldblocks)),
+				nextnobg = 1
+			#elif (prevforecol != forecol) and (prevbackcol == backcol):
+			#elif (prevforecol != forecol) and (prevbackcol == backcol):
+			#	outfile.write('' + str(prevforecol) + oldblocks),
+			#	nextnobg = 0
+			else:
+				outfile.write('' + str(prevforecol) + ',' + str(prevbackcol) + oldblocks),
+				#prevforecol = backcol
+				#prevbackcol = forecol
+				nextnobg = 0
+		prevforecol = forecol
+		prevbackcol = backcol
+		oldblocks = blocks  # keep track of previous blocks block for writing
+		spacesinob = spacesinblock
+		beginningofline = 0
+	# spit out last line with complete fg,bg color info just to be sure clients display the end correctly 
+	outfile.write('' + str(prevforecol) + ',' + str(prevbackcol) + oldblocks) 
+#	print('linenum: ' + str(linenum) + ' width: ' + str(linewidth))
+	linewidth = 0
+	linenum += 1
+	nextnobg = 0
+
+infile.close() 
+outfile.close() 
+
+
+
+# THIRD PASS: Catch those cases where we still have same background color after a colorchange 
+
+infile = open("tmp2.unc","r") 
+outfile = open(str(sys.argv[2]), "w") 
+linewidth = 0
+linenum = 0
+weswapped = 0
+nextnobg = 0
+for line in infile: 
+	oldblocks = ""
+	spacesinblock = 0
+	spacesinob = 0
+	words = line.split("")
+	iterwords = iter(words)
+#	next(iterwords)
+	prevforecol = 99
+	prevbackcol = 99
+	beginningofline = 1
+	for word in iterwords:
+		spacesinblock = 0
+		forecol = 98
+		backcol = 98
+#		print(word)
+		num = ''
+		blocks = ''
+		fgbg = 0
+		for i in word:
+			if i in '1234567890':
+				num+=i
+			if i == ',':
+				fgbg = 1
+				try:
+					forecol = int(num)
+				except ValueError:
+					forecol = 99
+#					print('ForecolBAD')
+				num = ''
+			if not i in ',1234567890':
+				blocks += i
+			if i == ' ':
+				spacesinblock += 1
+		if (fgbg == 0): 
+			try:
+				forecol = int(num)
+				backcol = prevbackcol
+			except ValueError:
+				forecol = prevforecol	
+				backcol = prevbackcol
+		else:
+			try:
+				backcol = int(num)
+				dontwriteblock = 0
+			except ValueError:
+				backcol = 99
+#				print('BackcolBAD')
+				dontwriteblock = 1
+
+#		if spacesinob > 0:	
+#			print('blocklen ' + str(len(blocks)) + ' numspaces ' + str(spacesinblock)),
+
+		
+		if (len(blocks) >= 1 ):  # Python gives us empty words at the beginning of each line
+			if (prevforecol != forecol) and (prevbackcol == backcol):
+				outfile.write('' + str(forecol) + blocks),
+			else:
+				outfile.write('' + str(forecol) + ',' + str(backcol) + blocks),
+		prevforecol = forecol
+		prevbackcol = backcol
+		spacesinob = spacesinblock
+		beginningofline = 0
+	# spit out last line with complete fg,bg color info just to be sure clients display the end correctly 
+	print('linenum: ' + str(linenum) + ' width: ' + str(linewidth))
+	linewidth = 0
+	linenum += 1
+	nextnobg = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
