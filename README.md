@@ -10,7 +10,7 @@ to unicode block graphics, using the 16-color mIRC palette.
 
 It is an entertaining challenge to draw pictures at low resolution with very few colors. It's fun to share them too. Make your own art and paste it to IRC channel ##ascii on the Freenode IRC network. 
 
-Sample: [img]http://a.pomfe.co/fqfikv.png[/img]
+Sample: https://a.pomfe.co/fqfikv.png
 
 Installation:
 
