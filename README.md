@@ -12,14 +12,14 @@ It is an entertaining challenge to draw pictures at low resolution with very few
 
 Sample: https://a.pomfe.co/fqfikv.png
 
-Installation:
+## Installation
 
 Linux:   Copy unicolexport.py to your ~/.gimp-2.8/plug-ins
 
 Windows: Install Linux
 
 
-Instructions:
+## Instructions
 
  0) Run GIMP, preferably from a terminal.
  1) Open the image to export in GIMP
@@ -31,3 +31,20 @@ Instructions:
  5) Check the terminal for program output. It will notify you if lines are too long for IRC.
  6) Load the image into your irc client (e.g. in irssi /exec cat /path/to/file/filename.unc
     or to send the image to a channel, /exec -o cat /path/to/file/filename.unc)
+
+## Examples
+
+![Examples](https://abload.de/img/cool-unicodebmws8sa8.png)
+An early pic of a BMW e21 
+
+![Examples](https://i.imgur.com/kRhJbGol.png)
+Famous people quotes are fun to do.
+
+![Examples](https://files.catbox.moe/b3uyji.png)
+There is no substitute for editing every pixel by hand.
+
+![Examples](https://abload.de/img/98colors92kra.png)
+The extended Mirc 99-color spec (Implemented by mIRC, Weechat and IRSSI so far)
+
+![Examples](https://a.pomfe.co/fqfikv.png)
+Automated mapping to 99 or 16 color palettes never works as well as you'd wish.  Best to do the mapping yourself.
