@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+import sys
+lineno = 0
+counter = 0
+linemax = 0
+maxlineno = 0
+byte=" "
+#infile = open(str(sys.argv[1]) , "r")
+with open(str(sys.argv[1]) , "rb") as f:
+    while 1:
+        byte_s = f.read(1)
+        #print('byte ' + str(byte_s))
+        if not byte_s:
+            break
+        byte = byte_s[0]
+#        print('byte ' + str(byte))
+        counter += 1
+        #if byte == b'\x0a':
+        if (str(byte) == '10'):
+#            print('EOL')
+            lineno += 1
+            if (counter >= linemax):
+                linemax = counter
+                maxlineno = lineno
+#                print('New Max')
+            counter = 0
+    print(sys.argv[1].ljust(34,"_") + ' ' +  "{:0>3d}".format(maxlineno) + ' ' +  "{:0>3d}".format(linemax))
