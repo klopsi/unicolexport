@@ -36,9 +36,10 @@ An early pic i did of a BMW e21
 
 ![Examples](https://abload.de/img/cool-unicodebmws8sa8.png)
 
-The IRC 16-color palette gives us two greyscales plus black and white.  This is an example of picking your source material carefully, adjusting color ramps in GIMP to optimize the conversion to 4-color greyscale, then letting gimp do floyd-steinberg dithering when converting to indexed 16-color mode.
+The IRC 16-color palette gives us two greys plus black and white.  Below is an example of picking your source material carefully, adjusting color ramps in GIMP to optimize the conversion to 4-color greyscale, then letting gimp do floyd-steinberg dithering when converting to indexed 16-color mode.
 
 ![Examples](https://files.catbox.moe/2g52xe.png)
+
 
 Famous people quotes are fun to do.
 
@@ -58,6 +59,11 @@ There is no substitute for editing every pixel by hand.
 ![Examples](https://abload.de/img/bitcoincapnqr8a.png)
 
 ![Examples](https://files.catbox.moe/b3uyji.png)
+
+![Examples](https://files.catbox.moe/x4u64t.png)
+
+![Examples](https://kek.gg/i/479HZC.png)
+
 
 The extended Mirc 99-color spec (Implemented by mIRC, Weechat and IRSSI so far)
 
