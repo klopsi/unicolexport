@@ -13,8 +13,8 @@ It is an entertaining challenge to draw pictures at low resolution with very few
 ## Installation
 
 Linux:   Copy unicolexport.py to your ~/.gimp-2.8/plug-ins/
-         Optional:
-                 Copy unc* helper scripts to /usr/local/bin and sudo chmod uog+x them 
+
+         Optional: Copy unc* helper scripts to /usr/local/bin and sudo chmod uog+x them 
                 
 Windows: I don't know (Install Linux?) :)
 
