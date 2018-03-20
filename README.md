@@ -67,7 +67,7 @@ There is no substitute for editing every pixel by hand.
 ![Examples](https://kek.gg/i/479HZC.png)
 
 
-The extended Mirc 99-color spec (Implemented by mIRC, Weechat and IRSSI so far)
+The above pictures were done with the standard mIRC 16-color palette.  More recently, a very reasonable extended 99-color spec was proposed and is implemented by mIRC, Weechat and IRSSI so far.  It is nice and good and Hexchat et.al. should be encouraged to adopt it. http://anti.teamidiot.de/static/nei/*/extended_mirc_color_proposal.html
 
 ![Examples](https://abload.de/img/98colors92kra.png)
 
