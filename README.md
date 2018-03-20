@@ -63,10 +63,12 @@ The extended Mirc 99-color spec (Implemented by mIRC, Weechat and IRSSI so far)
 
 ![Examples](https://abload.de/img/98colors92kra.png)
 
-99-colors poses special challenges - most color changes require the full 6 bytes, having more available colors means many color ramps requiring color changes per character, and no long runs of same color. Above image has a max line length of 481 Bytes after squishing.
+
+99-colors poses special challenges - most color changes require the full 6 bytes, having more available colors means many color ramps requiring color changes per character, and no long runs of same color. Below image has a max line length of 481 Bytes after squishing.
 
 ![Examples](https://files.catbox.moe/d5dk8w.png)
 
-Automated mapping to 99 or 16 color palettes never works as well as you'd wish.  Best to do the mapping yourself.
+
+Automated mapping to 99 or 16 color palettes never works as well as you'd wish.  Best to do the mapping yourself using the color curves, then the supplied gimp color palettes.
 
 ![Examples](https://a.pomfe.co/fqfikv.png)
