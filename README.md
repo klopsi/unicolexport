@@ -43,9 +43,8 @@ Famous people quotes are fun to do.
 
 ![Examples](https://abload.de/img/krugmancapsda9j.png)
 
-![Examples](https://files.catbox.moe/b3uyji.png)
-
 ![Examples](https://abload.de/img/stallmanquotcapj3p9e.png)
+
 
 There is no substitute for editing every pixel by hand.
 
@@ -55,6 +54,7 @@ There is no substitute for editing every pixel by hand.
 
 ![Examples](https://abload.de/img/bitcoincapnqr8a.png)
 
+![Examples](https://files.catbox.moe/b3uyji.png)
 
 The extended Mirc 99-color spec (Implemented by mIRC, Weechat and IRSSI so far)
 
