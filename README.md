@@ -76,6 +76,9 @@ The above pictures were done with the standard mIRC 16-color palette.  More rece
 
 ![Examples](https://files.catbox.moe/d5dk8w.png)
 
+99-colors gives enough greyscale for decent pics.  However post-export editing of the .un9 textfile is necessary, to eliminate redundant color changes and shorten the lines.  The below pic has maximum line length of 442 bytes.
+
+![Examples](https://files.catbox.moe/xosbme.png)
 
 Automated mapping to 99 or 16 color palettes never works as well as you'd wish.  Best to do the mapping yourself using the color curves, then the supplied gimp color palettes.
 
