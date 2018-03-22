@@ -3,8 +3,8 @@ mkdir -p squished
 for filename in $@; do
 	mynewname=${filename%.*}"sm.unc"
 	squishunc $filename "squished/"$mynewname
-	oldstats=$(unimax $filename)
-	newstats=$(unimax "squished/"$mynewname)
+	oldstats=$(uncmax $filename)
+	newstats=$(uncmax "squished/"$mynewname)
 	#printf "%s %s\n" $oldstats $newstats
 	echo  $oldstats " | "  $newstats
 done
